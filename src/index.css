@@ -359,16 +359,44 @@ footer { background: var(--dark); border-top: 1px solid var(--border); padding: 
 a.service-card { text-decoration: none; }
 
 /* RESPONSIVE */
+@media(max-width:1400px) {
+  .hero-content { max-width: 560px; }
+  .hero-stats { bottom: 32px; gap: 32px; }
+  .stat-num { font-size: 28px; }
+}
+@media(max-width:1200px) {
+  .hero { min-height: 760px; }
+  .hero-content { padding: 0 36px; }
+  h1 { font-size: clamp(44px,5vw,72px); margin-bottom: 16px; }
+  .hero-sub { font-size: 15px; margin-bottom: 28px; }
+  .hero-stats { bottom: 28px; left: 36px; right: 36px; gap: 24px; }
+  .stat-num { font-size: 26px; }
+  .stat-label { font-size: 10px; }
+  nav { padding: 0 36px; }
+  .ai-section, .services-section, .why-section, .reviews-section, .cta-section, footer { padding-left: 36px; padding-right: 36px; }
+  .service-page-body { padding: 60px 36px; }
+  .service-page-grid { grid-template-columns: 1fr 340px; gap: 40px; }
+  .contact-form-inner { gap: 48px; }
+  .projects-grid { grid-template-columns: repeat(2,1fr); }
+}
 @media(max-width:1100px) {
   .ai-layout,.why-grid { grid-template-columns: 1fr; }
   .services-grid { grid-template-columns: repeat(2,1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+  .service-page-grid { grid-template-columns: 1fr; }
+  .service-features-box { position: static; }
+  .contact-form-inner { grid-template-columns: 1fr; }
+  .reviews-grid { grid-template-columns: repeat(2,1fr); }
 }
 @media(max-width:700px) {
   nav { padding: 0 24px; }
   .nav-links { display: none; }
   .hero-content, .ai-section, .services-section, .why-section, .reviews-section, .cta-section, footer { padding-left: 24px; padding-right: 24px; }
-  .services-grid, .reviews-grid { grid-template-columns: 1fr; }
-  .hero-stats { gap: 24px; }
+  .services-grid, .reviews-grid, .projects-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 20px; bottom: 20px; left: 24px; right: 24px; }
   .stat-divider { display: none; }
+  .stat-num { font-size: 24px; }
+  .form-row { grid-template-columns: 1fr; }
+  .service-page-nav-link { padding: 20px 24px; }
+  .page-hero, .service-page-hero-content { padding-left: 24px; padding-right: 24px; }
 }
