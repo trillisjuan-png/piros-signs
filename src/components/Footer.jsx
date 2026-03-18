@@ -6,9 +6,14 @@ export default function Footer() {
     <footer>
       <div className="footer-grid">
         <div className="footer-brand">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-            <div className="logo-mark"><span>PS</span></div>
-            <Link to="/" className="logo-text">Piros <em style={{ color: 'var(--red)', fontStyle: 'normal' }}>Signs</em></Link>
+          <div style={{ marginBottom: '16px' }}>
+            <Link to="/">
+              <img
+                src="https://www.pirossigns.com/wp-content/uploads/2024/12/PirosSigns-LogoWeb-204w.jpg"
+                alt="Piros Signs"
+                className="footer-logo-img"
+              />
+            </Link>
           </div>
           <p className="footer-desc">
             Third-generation family sign company serving St. Louis, Columbia, and Jefferson City since 1957.

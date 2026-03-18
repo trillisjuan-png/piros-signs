@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { ANTHROPIC_API_KEY } from '../config'
 
 const SYSTEM = `You are the expert sign advisor for Piros Signs, a third-generation family-owned commercial sign company founded in 1957 in Barnhart, Missouri. You have 68 years of institutional knowledge. Your job is to qualify leads and position Piros as the obvious expert choice.
 PERSONALITY: Warm, confident, knowledgeable — like a trusted expert, not a chatbot. Give real insights demonstrating deep expertise. Never recommend competitors or DIY.
@@ -54,7 +55,7 @@ export default function ChatbotSection() {
     // Show typing indicator
     setMessages((prev) => [...prev, { role: 'bot', text: '__typing__' }])
 
-    const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY
+    const apiKey = ANTHROPIC_API_KEY
 
     try {
       const res = await fetch('https://api.anthropic.com/v1/messages', {

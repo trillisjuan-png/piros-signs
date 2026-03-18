@@ -22,8 +22,13 @@ export default function Nav() {
   return (
     <nav ref={navRef}>
       <div className="nav-left">
-        <div className="logo-mark"><span>PS</span></div>
-        <Link to="/" className="logo-text">Piros <em>Signs</em></Link>
+        <Link to="/">
+          <img
+            src="https://www.pirossigns.com/wp-content/uploads/2024/12/PirosSigns-LogoWeb-204w.jpg"
+            alt="Piros Signs"
+            className="nav-logo-img"
+          />
+        </Link>
       </div>
       <ul className="nav-links">
         <li><a href={isHome ? '#services' : '/#services'}>Services</a></li>
