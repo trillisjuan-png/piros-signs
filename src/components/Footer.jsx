@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom'
+import { services } from '../data/services'
+
 export default function Footer() {
   return (
     <footer>
@@ -5,7 +8,7 @@ export default function Footer() {
         <div className="footer-brand">
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
             <div className="logo-mark"><span>PS</span></div>
-            <span className="logo-text">Piros <em style={{ color: 'var(--red)', fontStyle: 'normal' }}>Signs</em></span>
+            <Link to="/" className="logo-text">Piros <em style={{ color: 'var(--red)', fontStyle: 'normal' }}>Signs</em></Link>
           </div>
           <p className="footer-desc">
             Third-generation family sign company serving St. Louis, Columbia, and Jefferson City since 1957.
@@ -19,10 +22,10 @@ export default function Footer() {
         </div>
 
         <div className="footer-col">
-          <h4>Services</h4>
+          <h4>Projects</h4>
           <ul>
-            {['Channel Letters', 'Cabinet Signs', 'Monument Signs', 'Pylon Signs', 'Digital Signs', 'Sign Repair'].map((s) => (
-              <li key={s}><a href="#services">{s}</a></li>
+            {services.map((s) => (
+              <li key={s.slug}><Link to={`/projects/${s.slug}`}>{s.name}</Link></li>
             ))}
           </ul>
         </div>
@@ -30,9 +33,11 @@ export default function Footer() {
         <div className="footer-col">
           <h4>Company</h4>
           <ul>
-            {['About Us', 'Projects', 'Reviews', 'Service Area', 'Referrals'].map((s) => (
-              <li key={s}><a href="#">{s}</a></li>
-            ))}
+            <li><a href="/#why">About Us</a></li>
+            <li><Link to="/projects">Projects</Link></li>
+            <li><a href="/#reviews">Reviews</a></li>
+            <li><a href="#">Service Area</a></li>
+            <li><a href="#">Referrals</a></li>
           </ul>
         </div>
 
@@ -40,9 +45,9 @@ export default function Footer() {
           <h4>Contact</h4>
           <ul>
             <li><a href="tel:6364640200">(636) 464-0200</a></li>
-            <li><a href="#">Barnhart, MO</a></li>
-            <li><a href="#">Holts Summit, MO</a></li>
-            <li><a href="#chatbot">AI Sign Advisor</a></li>
+            <li><span style={{ color: 'var(--muted)', fontSize: '14px' }}>Barnhart, MO</span></li>
+            <li><span style={{ color: 'var(--muted)', fontSize: '14px' }}>Holts Summit, MO</span></li>
+            <li><Link to="/contact">AI Sign Advisor</Link></li>
             <li><a href="tel:6364640200">Emergency Repair</a></li>
           </ul>
         </div>

@@ -9,7 +9,7 @@ CONVERSATION GOALS — collect naturally (never as a form dump):
 4. Sign type and timeline
 FLOW:
 - Open with the 68-year expertise and immediate answers hook
-- Ask about existing branding / website naturally
+- When the conversation turns to logo, brand colors, or existing signage, ask if they have a website — offer to pull their current branding and design elements directly from it so you can tailor your advice and any concept to their actual look. Ask for the URL naturally, not as a form field.
 - Raise permitting naturally — position Piros's in-house permit team as key advantage
 - Generate sign concept image when you have enough info using: <image_request>{"prompt":"..."}</image_request>
 HARD RULES:
@@ -24,7 +24,7 @@ export default function ChatbotSection() {
   const [messages, setMessages] = useState([
     {
       role: 'bot',
-      text: "Hey there — I'm the sign advisor here at Piros Signs. With 68 years in the business, I can answer just about any sign question right now, no waiting for a callback.\n\nWhat kind of sign project are you working on?",
+      text: "Hey — glad you're here. Before building this advisor, we sat down with our permitting, sales, design, service, and production teams and pulled together over 100 of the most common questions we hear from customers.\n\nEvery answer in here reflects 68 years of real experience from the people who actually do this work every day — not a generic chatbot.\n\nWhat kind of sign project are you working on?",
     },
   ])
   const [input, setInput] = useState('')
@@ -63,9 +63,10 @@ export default function ChatbotSection() {
           'Content-Type': 'application/json',
           'x-api-key': apiKey,
           'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true',
         },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
+          model: 'claude-sonnet-4-6',
           max_tokens: 1000,
           system: SYSTEM,
           messages: newHistory,
@@ -77,10 +78,9 @@ export default function ChatbotSection() {
       setMessages((prev) => prev.filter((m) => m.text !== '__typing__'))
 
       if (data.error) {
-        const errText =
-          data.error.type === 'authentication_error' || !apiKey
-            ? '⚠️ API key not set. Add VITE_ANTHROPIC_API_KEY to your .env file.'
-            : `Error: ${data.error.message}`
+        const errText = !apiKey
+          ? '⚠️ API key not set. Add VITE_ANTHROPIC_API_KEY to your .env file.'
+          : `Error (${data.error.type}): ${data.error.message}`
         setMessages((prev) => [...prev, { role: 'bot', text: errText }])
       } else {
         const full = data.content[0].text
@@ -113,8 +113,10 @@ export default function ChatbotSection() {
           </div>
           <h2 className="section-title">Meet Your<br />Sign Advisor.</h2>
           <p className="section-body">
-            No forms. No waiting for a callback. Ask our AI advisor anything about your sign
-            project right now — and get answers backed by 68 years of expertise.
+            This isn't a generic chatbot. Before building this advisor, we went department by
+            department — permitting, sales, design, service, and production — and asked each
+            team over 100 questions. What you get here is 68 years of expertise, organized and ready
+            to answer yours.
           </p>
           <div className="ai-features">
             <div className="ai-feature">

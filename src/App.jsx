@@ -1,31 +1,40 @@
+import { useEffect } from 'react'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import './App.css'
 import { useScrollFade } from './hooks/useScrollFade'
 import Nav from './components/Nav'
-import Hero from './components/Hero'
-import Ticker from './components/Ticker'
-import ChatbotSection from './components/ChatbotSection'
-import Services from './components/Services'
-import WhyPiros from './components/WhyPiros'
-import Reviews from './components/Reviews'
-import CTA from './components/CTA'
 import Footer from './components/Footer'
+import Home from './pages/Home'
+import Projects from './pages/Projects'
+import ServicePage from './pages/ServicePage'
+import Contact from './pages/Contact'
 
-function App() {
-  useScrollFade()
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  return null
+}
 
+function AppRoutes() {
+  const { pathname } = useLocation()
+  useScrollFade(pathname)
   return (
-    <>
-      <Nav />
-      <Hero />
-      <Ticker />
-      <ChatbotSection />
-      <Services />
-      <WhyPiros />
-      <Reviews />
-      <CTA />
-      <Footer />
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/projects" element={<Projects />} />
+      <Route path="/projects/:slug" element={<ServicePage />} />
+      <Route path="/contact" element={<Contact />} />
+    </Routes>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <Nav />
+      <AppRoutes />
+      <Footer />
+    </BrowserRouter>
+  )
+}

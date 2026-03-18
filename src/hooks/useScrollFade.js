@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-export function useScrollFade() {
+export function useScrollFade(dep) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -8,9 +8,9 @@ export function useScrollFade() {
           if (e.isIntersecting) e.target.classList.add('visible')
         })
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     )
     document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el))
     return () => observer.disconnect()
-  }, [])
+  }, [dep])
 }

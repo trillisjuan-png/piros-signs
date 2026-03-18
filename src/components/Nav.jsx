@@ -1,7 +1,10 @@
 import { useEffect, useRef } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 export default function Nav() {
   const navRef = useRef(null)
+  const { pathname } = useLocation()
+  const isHome = pathname === '/'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,18 +23,19 @@ export default function Nav() {
     <nav ref={navRef}>
       <div className="nav-left">
         <div className="logo-mark"><span>PS</span></div>
-        <a href="#" className="logo-text">Piros <em>Signs</em></a>
+        <Link to="/" className="logo-text">Piros <em>Signs</em></Link>
       </div>
       <ul className="nav-links">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#why">Why Piros</a></li>
-        <li><a href="#chatbot">AI Advisor</a></li>
-        <li><a href="#reviews">Reviews</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href={isHome ? '#services' : '/#services'}>Services</a></li>
+        <li><Link to="/projects">Projects</Link></li>
+        <li><a href={isHome ? '#why' : '/#why'}>Why Piros</a></li>
+        <li><a href={isHome ? '#chatbot' : '/#chatbot'}>AI Advisor</a></li>
+        <li><a href={isHome ? '#reviews' : '/#reviews'}>Reviews</a></li>
+        <li><Link to="/contact">Contact</Link></li>
       </ul>
       <div className="nav-right">
         <a href="tel:6364640200" className="nav-phone">(636) 464-0200</a>
-        <a href="#chatbot" className="btn btn-red">Get a Quote</a>
+        <Link to="/contact" className="btn btn-red">Get a Quote</Link>
       </div>
     </nav>
   )

@@ -1,15 +1,61 @@
+import { useState, useEffect } from 'react'
+
+const PHOTOS = [
+  { src: 'https://www.pirossigns.com/wp-content/uploads/2024/12/piros-1920w-1024x768.jpg', label: 'Bridgestone Arena' },
+  { src: 'https://www.pirossigns.com/wp-content/uploads/2024/12/Piros-Signs-Company-1920w.jpg', label: 'Scoreboard' },
+  { src: 'https://www.pirossigns.com/wp-content/uploads/2024/12/BarnesJewishWeb-768x576-1920w.jpg', label: 'Barnes Jewish Hi-Rise' },
+  { src: 'https://www.pirossigns.com/wp-content/uploads/2024/12/Horseshoe-Casino-LED-Pylon-Sign-St.-Louis-MO-2880w-1024x1024.jpg', label: 'Horseshoe Casino Pylon' },
+  { src: 'https://www.pirossigns.com/wp-content/uploads/2024/12/Imos-Piros-Signs-1920w.jpg', label: "Imo's Pizza" },
+  { src: 'https://www.pirossigns.com/wp-content/uploads/2024/12/Fenton-Logistics-768x576-1920w.jpg', label: 'Fenton Logistics Park' },
+  { src: 'https://www.pirossigns.com/wp-content/uploads/2024/12/Piros-Signs-Digital-2880w.jpg', label: 'Digital Signs' },
+  { src: 'https://www.pirossigns.com/wp-content/uploads/2024/12/StAgnesWeb-768x576-1920w.jpg', label: 'St. Agnes Monument Sign' },
+]
+
+function HeroSlideshow() {
+  const [current, setCurrent] = useState(0)
+  const [prev, setPrev] = useState(null)
+  const [fading, setFading] = useState(false)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setPrev(current)
+      setFading(true)
+      setCurrent((c) => (c + 1) % PHOTOS.length)
+      setTimeout(() => { setPrev(null); setFading(false) }, 800)
+    }, 3500)
+    return () => clearInterval(timer)
+  }, [current])
+
+  return (
+    <div className="hero-slideshow">
+      {prev !== null && (
+        <div className="hero-slide hero-slide-exit">
+          <img src={PHOTOS[prev].src} alt={PHOTOS[prev].label} />
+        </div>
+      )}
+      <div className={`hero-slide ${fading ? 'hero-slide-enter' : ''}`}>
+        <img src={PHOTOS[current].src} alt={PHOTOS[current].label} />
+      </div>
+      <div className="hero-slide-dots">
+        {PHOTOS.map((_, i) => (
+          <button
+            key={i}
+            className={`hero-slide-dot ${i === current ? 'active' : ''}`}
+            onClick={() => setCurrent(i)}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function Hero() {
   return (
     <section className="hero">
       <div className="hero-bg"></div>
       <div className="hero-grid"></div>
       <div className="hero-slash"></div>
-      <div className="hero-photos">
-        <div className="hero-photo hp1"></div>
-        <div className="hero-photo hp2"></div>
-        <div className="hero-photo hp3"></div>
-        <div className="hero-photo hp4"></div>
-      </div>
+      <HeroSlideshow />
       <div className="hero-content">
         <div className="ai-badge">
           <div className="pulse"></div>
